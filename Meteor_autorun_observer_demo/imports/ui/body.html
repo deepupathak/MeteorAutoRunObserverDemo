@@ -1,0 +1,63 @@
+<head>
+  <title>Autorun Observer Demo</title>
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+</head>
+
+<template name="AddRecordForm">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-3">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h3 class="panel-title">Add student record</h3>
+					</div>
+					<div class="panel-body">	
+						{{> autoformModals}}
+						{{#afModal title="Insert record" class="btn btn-primary" collection="Student" operation="insert" formId="insertRecord" title="Insert record"}}
+  						Add new record
+						{{/afModal}}
+					</div>
+				</div>
+			</div>
+			<div class="col-md-9">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h3 class="panel-title">Student records (Total Records: {{Count}})</h3>
+					</div>
+					<div class="panel-body">
+						<table class="table table-striped">
+							<tr>
+								<th>User Id</th>
+								<th>First Name</th>
+								<th>Last Name</th>
+								<th>Email</th>
+								<th>Address</th>
+								<th>Update</th>
+								<th>Delete</th>
+							</tr>
+							{{#each students}}
+								<tr>
+									<td>{{_id}}</td>
+									<td>{{firstname}}</td>
+									<td>{{lastname}}</td>
+									<td>{{email}}</td>
+									<td>{{Address}}</td>
+									<td>
+										{{#afModal class="btn btn-primary" collection="Student" operation="update" doc=_id  title="Update record"}}
+		  								<i class="fa fa-pencil" aria-hidden="true"></i>
+										{{/afModal}}
+									</td>
+									<td>
+										{{#afModal class="btn btn-danger" collection="Student" operation="remove" doc=_id prompt="Are you sure want to delete this record ?" title="Delete record"}}
+		  								<i class="fa fa-trash" aria-hidden="true"></i>
+										{{/afModal}}
+									</td>
+								</tr>
+							{{/each}}
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</template>
